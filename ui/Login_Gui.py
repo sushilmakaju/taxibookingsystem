@@ -8,15 +8,24 @@ from tkinter import ttk
 from PIL import ImageTk,Image
 from tkinter import messagebox
 
-class Login:
-    def __init__(self):
-        self.root = Tk()
-        self.user_var = tk.StringVar()
-        self.pass_var = tk.StringVar()
+from backend.logindbms import customer_login
+from middleware.customer_library import CustomerLibs
+from ui import Registraion
+
+
+class Login():
+    def __init__(self, root):
+        self.root=root
+
+
+
         self.root.title("Loginpage")
         self.root.resizable(0,False)
         self.root.geometry("850x500")
         self.root.config(bg="#ffff00")
+
+        self.user_var = tk.StringVar()
+        self.pass_var = tk.StringVar()
 
         #### pannel ####
         lbl_heading = Label(self.root, text= "Taxi Booking System", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20).place(x=0, y=0,relwidth=1, height=80)
@@ -37,7 +46,7 @@ class Login:
         lbl_heading = Label(login_frame,text="Login here", font=("Elephant",18,"bold"),bg="white").place(x=32,y=10,relwidth=1)
         lbl_username = Label(login_frame,text="Username: ", font=("TimesNewRoman",15),bg="white").place(x=32,y=65)
         lbl_password = Label(login_frame,text="Password: ", font=("TimesNewRoman",15),bg="white").place(x=32, y=115)
-        lbl_usertype = Label(login_frame,text="Usertype: ", font=("TimesNewRoman",15),bg="white").place(x=32, y=165)
+
 
         #textfeild##
 
@@ -46,41 +55,52 @@ class Login:
         pass_txt = Entry(login_frame,show="*",textvariable=self.pass_var,font=("Andalus",10),bg="white")
         pass_txt.place(x=150,y=115,width=200,height=25)
 
-        #combobox
-        usertype_cmb = ttk.Combobox(login_frame,values=("Select UserType","Customer","Rider","Admin"),state='readonly',font=("TimesNewRoman",10))
-        usertype_cmb.place(x=150, y=165, width=200, height=25)
+
 
         def login():
-            variable12 = middleware(username=username_txt.get(), password=pass_txt.get())
-            result1 = selectlogin(variable12)
+            variable12 = CustomerLibs(username=username_txt.get(), password=pass_txt.get())
+            result1 = customer_login(variable12)
             if result1 != None:
-                print(result1)
-                self.root.destroy()
-                Driver_Dashboard(self.root)
-                self.root.mainloop()
+                messagebox.showinfo("TBS",'Welcome {}'.format(username_txt.get()))
+
+            else:
+                messagebox.showerror("TBS","Error Occurred")
 
 
       #_______________button____________
-        login_btn = Button(login_frame,text="Login", font=("italic",10),bg="white",command=login).place(x=110, y=220)
-        Close_btn = Button(login_frame, text="Close", font=("italic", 10), bg="white", command=self.root.destroy).place(x=160, y=220)
-        create_btn= Button(login_frame,text="Create new account", font=("italic",10),bg="white",command=self.reg).place(x=100,y=270)
+        login_btn = Button(login_frame,text="Login",command=login, font=("italic",10),bg="white")
+        login_btn.place(x=150, y=180)
+        Close_btn = Button(login_frame, text="Close", font=("italic", 10), bg="white", command=self.root.destroy)
+        Close_btn.place(x=200, y=180)
+
+
+        def registration():
+            self.root.destroy()
+            root=Tk()
+            Registraion.registration_class(root)
+            root.mainloop()
+
+        create_btn= Button(login_frame,text="Create new account",command=registration, font=("italic",10),bg="white")
+        create_btn.place(x=150,y=220)
 
         self.root.mainloop()
     ##passing default value
 
 
-    def reg(self):
-
-        self.root.withdraw()
-        Registraion.registration_class(self.root)
-        # self.new_win=Toplevel(self.root)
-        # self.root.withdraw()
-        # self.new_obj=registration_class(self.new_win)
+    # def reg(self):
+    #
+    #     self.root.withdraw()
+    #     Registraion.registration_class(self.root)
+    #     # self.new_win=Toplevel(self.root)
+    #     # self.root.withdraw()
+    #     # self.new_obj=registration_class(self.new_win)
 
 if __name__ == "__main__":
-    import Registraion
+    root=Tk()
+    Login(root)
+    root.mainloop()
 
-    lgn = Login()
+
 
 
 
