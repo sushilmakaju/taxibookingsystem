@@ -91,16 +91,10 @@ class Login():
         create_btn.place(x=150,y=220)
 
         self.root.mainloop()
-    ##passing default value
 
 
-    # def reg(self):
-    #
-    #     self.root.withdraw()
-    #     Registraion.registration_class(self.root)
-    #     # self.new_win=Toplevel(self.root)
-    #     # self.root.withdraw()
-    #     # self.new_obj=registration_class(self.new_win)
+
+
 
 if __name__ == "__main__":
     root=Tk()

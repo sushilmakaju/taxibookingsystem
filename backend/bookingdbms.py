@@ -47,7 +47,7 @@ def customerbookingtable(customerid):
 
 def delete_booking(delete):
     conn = None
-    sql = """DELETE FROM booking WHERE customer_id=%s"""
+    sql = """DELETE FROM booking WHERE booking_id=%s"""
     values = (delete,)
     deleteresult = False
     try:
@@ -63,3 +63,24 @@ def delete_booking(delete):
     finally:
         del values, sql, conn
         return deleteresult
+
+def update_booking(update):
+    conn = None
+    sql = """UPDATE booking set pickup_address=%s, pickup_time=%s, drop_address=%s WHERE booking_id=%s"""
+    values = (update.getpickup_address(), update.getpickup_time(), update.getdrop_address())
+    updateresult = False
+    try:
+        conn = connect()
+        cursor = conn.cursor()
+        cursor.execute(sql, values)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        updateResult = True
+
+    except:
+        print("Error", sys.exc_info())
+
+    finally:
+        del values, sql, conn
+        return updateresult

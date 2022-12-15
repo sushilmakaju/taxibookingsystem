@@ -89,6 +89,8 @@ class booktrip_class:
 
 
 
+
+
         #______________button_______________
         save_btn = Button(self.trip, text="Save",command=insert_booking12, font=("TimesNewRoman",15),bg="#808000",fg="white")
         save_btn.place(x=170,y=210, height=25)
