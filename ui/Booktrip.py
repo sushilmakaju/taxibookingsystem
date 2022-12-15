@@ -18,6 +18,7 @@ class booktrip_class:
 
         custID=Entry(self.trip)
         custID.insert(0, Global.customerAccount[0])
+        bookID=Entry(self.trip)
 
         #_______label________
 
@@ -75,12 +76,15 @@ class booktrip_class:
                 messagebox.showerror("TBS","Error Occurred")
 
         def delete():
-            ID=custID.get()
+            ID=bookID.get()
             deleteresult= delete_booking(ID)
             if deleteresult == True:
                 messagebox.showinfo("TBS", "Booking cancelled sucessfully")
             else:
                 messagebox.showerror("TBS", "Error Occurred")
+
+
+
 
 
 

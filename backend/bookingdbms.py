@@ -51,7 +51,7 @@ def delete_booking(delete):
     values = (delete,)
     deleteresult = False
     try:
-        conn = mysql.Connect()
+        conn = connect()
         cursor = conn.cursor()
         cursor.execute(sql, values)
         conn.commit()
