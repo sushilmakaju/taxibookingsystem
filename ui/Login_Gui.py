@@ -9,8 +9,9 @@ from PIL import ImageTk,Image
 from tkinter import messagebox
 
 from backend.logindbms import customer_login
+from middleware import Global
 from middleware.customer_library import CustomerLibs
-from ui import Registraion
+from ui import Registraion, Booktrip
 
 
 class Login():
@@ -61,7 +62,12 @@ class Login():
             variable12 = CustomerLibs(username=username_txt.get(), password=pass_txt.get())
             result1 = customer_login(variable12)
             if result1 != None:
+                Global.customerAccount =result1
                 messagebox.showinfo("TBS",'Welcome {}'.format(username_txt.get()))
+                self.root.destroy()
+                root=Tk()
+                Booktrip.booktrip_class(root)
+                root.mainloop()
 
             else:
                 messagebox.showerror("TBS","Error Occurred")
@@ -75,6 +81,7 @@ class Login():
 
 
         def registration():
+
             self.root.destroy()
             root=Tk()
             Registraion.registration_class(root)

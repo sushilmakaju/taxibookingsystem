@@ -42,7 +42,8 @@ class assignbooking:
 
         #____________label_______
 
-       unconfirmed_lbl = Label(booked_frame, text="Unconfirmed Booking List", font=("TimesNewRoman", 15),bg="#800000", fg="white").pack(side=TOP, fill=X)
+       unconfirmed_lbl = Label(booked_frame, text="Unconfirmed Booking List", font=("TimesNewRoman", 15),bg="#800000", fg="white")
+       unconfirmed_lbl.pack(side=TOP, fill=X)
        confirmed_lbl = Label(confirm_frame, text="Confirmed Booking List", font=("TimesNewRoman", 15), bg="#008080",fg="white").pack(side=TOP, fill=X)
 
 
