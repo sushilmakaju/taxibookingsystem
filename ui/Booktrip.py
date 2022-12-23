@@ -3,7 +3,7 @@ from tkinter import *
 import datetime
 from tkcalendar import Calendar, DateEntry
 from tkinter import messagebox
-from backend.bookingdbms import insert_Booking, customerbookingtable, delete_booking
+from backend.bookingdbms import insert_Booking, customerbookingtable, delete_booking, update_booking
 from middleware import Global
 from middleware.booking_library import bookinglibs
 from tkinter import ttk
@@ -16,13 +16,22 @@ class booktrip_class:
         self.trip.geometry("750x550")
         self.trip.resizable(0, False)
 
+        frame_width = 750
+        frame_height = 550
+        screen_width = self.trip.winfo_screenwidth()
+        screen_height = self.trip.winfo_screenheight()
+        x_cordinate = int((screen_width / 2) - (frame_width / 2))
+        y_cordinate = int((screen_height / 2) - (frame_height / 2))
+        self.trip.geometry("{}x{}+{}+{}".format(frame_width, frame_height, x_cordinate, y_cordinate))
+
         custID=Entry(self.trip)
         custID.insert(0, Global.customerAccount[0])
         bookID=Entry(self.trip)
 
         #_______label________
 
-        lbl_heading = Label(self.trip, text= "Booktrip", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20).place(x=0, y=0,relwidth=1, height=50)
+        lbl_heading = Label(self.trip, text= "Booktrip", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20)
+        lbl_heading.place(x=0, y=0,relwidth=1, height=50)
 
       #____________frame________
         pickupframe = LabelFrame(self.trip, text="Booking", font=("TimesNewRoman", 12), bd=2, relief=RIDGE,bg="white")
@@ -48,7 +57,8 @@ class booktrip_class:
 
 
         #____________entryfeild____________________
-        pickupdate_txt = DateEntry(pickupframe, font=("TimesNewRoman",15),bg="white")
+        dt= datetime.date.today()
+        pickupdate_txt = DateEntry(pickupframe, font=("TimesNewRoman",15),bg="white", mindate=dt)
         pickupdate_txt.place(x=110,y=5,width=120)
 
         pickup_txt = Entry(pickupframe, font=("TimesNewRoman", 15), bg="white")
@@ -56,7 +66,9 @@ class booktrip_class:
 
 
         time_txt = Entry(dropframe, font=("TimesNewRoman",15),bg="white")
+
         time_txt.place(x=110,y=5,width=120)
+
         dropaddress_txt = Entry(dropframe, font=("TimesNewRoman", 15), bg="white")
         dropaddress_txt.place(x=110, y=60, width=120)
 
@@ -70,6 +82,7 @@ class booktrip_class:
             if result==True:
                 messagebox.showinfo("TBS","The booking is requested")
                 treeview.delete(*treeview.get_children())
+
                 bookingtable()
 
             else:
@@ -80,31 +93,49 @@ class booktrip_class:
             deleteresult= delete_booking(ID)
             if deleteresult == True:
                 messagebox.showinfo("TBS", "Booking cancelled sucessfully")
+                treeview.delete(*treeview.get_children())
+
+                bookingtable()
             else:
                 messagebox.showerror("TBS", "Error Occurred")
 
+        def update():
+            bookingidd = bookID.get()
+            pickup = pickup_txt.get()
+            pickuptime = time_txt.get()
+            drop = dropaddress_txt.get()
 
 
+            booking = bookinglibs(booking_id=bookingidd,pickup_address = pickup, pickup_time = pickuptime,drop_address = drop)
+            result = update_booking(booking)
+            if result == True:
+                messagebox.showinfo("Customer", "The data is updated")
+                treeview.delete(*treeview.get_children())
 
-
-
-
+                bookingtable()
+            else:
+                messagebox.showerror("Customer", "Error Occurred")
 
 
         #______________button_______________
         save_btn = Button(self.trip, text="Save",command=insert_booking12, font=("TimesNewRoman",15),bg="#808000",fg="white")
         save_btn.place(x=170,y=210, height=25)
 
-        update_btn = Button(self.trip, text="Update", font=("TimesNewRoman",15),bg="#008080",fg="white")
+        update_btn = Button(self.trip, text="Update",command=update, font=("TimesNewRoman",15),bg="#008080",fg="white")
         update_btn.place(x=250,y=210,height=25)
-
-
 
 
         delete_btn = Button(self.trip, text="Delete",command=delete, font=("TimesNewRoman",15),bg="#FF7F50", fg="white")
         delete_btn.place(x=350,y=210,height=25)
 
-        clear_btn = Button(self.trip, text="Clear", font=("TimesNewRoman",15),bg="#B8860B", fg="white")
+        def clear():
+            bookID.delete(0, END)
+            pickupdate_txt.delete(0, END)
+            pickup_txt.delete(0, END)
+            time_txt.delete(0, END)
+            dropaddress_txt.delete(0, END)
+
+        clear_btn = Button(self.trip, text="Clear",command=clear, font=("TimesNewRoman",15),bg="#B8860B", fg="white")
         clear_btn.place(x=450,y=210,height=25)
 
         tab=ttk.Notebook(self.trip)
@@ -149,6 +180,27 @@ class booktrip_class:
                 treeview.insert(parent='', index='end', values=(a[0],a[1],a[2],a[4],a[3],a[7],a[5]))
 
         bookingtable()
+
+        def getData(sushil):
+
+            bookID.delete(0, END)
+            pickupdate_txt.delete(0, END)
+            pickup_txt.delete(0, END)
+            time_txt.delete(0, END)
+            dropaddress_txt.delete(0, END)
+
+
+
+
+            selectitem=treeview.selection()[0]
+
+            bookID.insert(0, treeview.item(selectitem)['values'][0])
+            pickupdate_txt.insert(1, treeview.item(selectitem)['values'][3])
+            pickup_txt.insert(2, treeview.item(selectitem)['values'][2])
+            time_txt.insert(3, treeview.item(selectitem)['values'][4])
+            dropaddress_txt.insert(4,treeview.item(selectitem)['values'][4])
+
+        treeview.bind('<<TreeviewSelect>>', getData)
 
 
 

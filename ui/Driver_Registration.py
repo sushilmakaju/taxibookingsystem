@@ -54,7 +54,7 @@ class driverres_class():
             add = Address_entry1.get()
             lic = Licenseno_entry1.get()
 
-            div = DriverLibs('', name=name1, phone=number, address=add, username=user, password=password, licenseno=lic)
+            div = DriverLibs('', name=name1, phone=number, address=add, username=user, password=password, licenseno=lic, status='Available')
             result = rider(div)
             if result == True:
                 messagebox.showinfo("TaxiBookingSystem", "Driver Registered suscessfully")
@@ -73,7 +73,7 @@ class driverres_class():
         Register_btn = Button(frame, text="Sumbit",font=("goudy old style",15),command=divreg12, bg="#ffff00",fg="black")
         Register_btn.place(x=350,y=300,width=110,height=40)
 
-        back_btn = Button(frame, text="Back to login",font=("goudy old style",15), bg="#ffff00",fg="black",)
+        back_btn = Button(frame, text="Back to login",font=("goudy old style",15),command=back12,bg="#ffff00",fg="black",)
         back_btn.place(x=550,y=300,width=110,height=40)
 
 

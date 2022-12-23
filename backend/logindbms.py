@@ -22,3 +22,46 @@ def customer_login(custInfo):
     finally:
         del values, sql, conn
         return result
+
+
+def driver_login(driverInfo):
+    conn=None
+    sql="""SELECT * FROM drivers WHERE username=%s and password=%s"""
+    values=(driverInfo.getusername(), driverInfo.getpassword())
+    result=None
+    try:
+        conn=connect()
+        cursor=conn.cursor()
+        cursor.execute(sql, values)
+        result=cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+
+    except:
+        print("Error",sys.exc_info())
+
+    finally:
+        del values, sql, conn
+        return result
+
+def admin_login(adminInfo):
+    conn=None
+    sql="""SELECT * FROM admin WHERE username=%s and password=%s"""
+    values=(adminInfo.getusername(), adminInfo.getpassword())
+    result=None
+    try:
+        conn=connect()
+        cursor=conn.cursor()
+        cursor.execute(sql, values)
+        result=cursor.fetchone()
+        cursor.close()
+        conn.close()
+
+
+    except:
+        print("Error",sys.exc_info())
+
+    finally:
+        del values, sql, conn
+        return result

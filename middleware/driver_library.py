@@ -1,6 +1,6 @@
 
 class DriverLibs():
-    def __init__(self,driver_id=0,name=None,phone=None,address=None,username=None,password=None,licenseno=None):
+    def __init__(self,driver_id=0,name=None,phone=None,address=None,username=None,password=None,licenseno=None,status=None):
         self.driver_id=driver_id
         self.name=name
         self.phone=phone
@@ -8,6 +8,7 @@ class DriverLibs():
         self.username=username
         self.password=password
         self.licenseno=licenseno
+        self.status=status
 
         #getter
     def getdriver_id(self):
@@ -24,6 +25,8 @@ class DriverLibs():
         return self.password
     def getlicenseno(self):
         return self.licenseno
+    def getstatus(self):
+        return self.status
 
     #setter
     def setdriver_id(self,driver_id):
@@ -40,8 +43,10 @@ class DriverLibs():
         self.password=password
     def setgender(self,licenseno):
         self.licenceno=licenseno
+    def setstatus(self,status):
+        self.status=status
 
     #str/tostring
     def __str__(self):
-        return("{}, {}, {}, {}, {}, {}, {}".format(self.driver_id,self.name,self.phone,self.address,self.username,self.password,self.licenceno))
+        return("{}, {}, {}, {}, {}, {}, {}, {}".format(self.driver_id,self.name,self.phone,self.address,self.username,self.password,self.licenceno, self.status))
 

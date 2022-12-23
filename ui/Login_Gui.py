@@ -3,15 +3,17 @@ import tkinter as tk
 import Driver_Dashboard
 
 
-#from Registraion import *
+
 from tkinter import ttk
 from PIL import ImageTk,Image
 from tkinter import messagebox
 
-from backend.logindbms import customer_login
+from backend.logindbms import customer_login, driver_login, admin_login
 from middleware import Global
+from middleware.admin_library import adminlibs
 from middleware.customer_library import CustomerLibs
-from ui import Registraion, Booktrip
+from middleware.driver_library import DriverLibs
+from ui import Registraion, Booktrip, Admindashboard
 
 
 class Login():
@@ -22,14 +24,21 @@ class Login():
 
         self.root.title("Loginpage")
         self.root.resizable(0,False)
-        self.root.geometry("850x500")
         self.root.config(bg="#ffff00")
+        frame_width = 850
+        frame_height = 500
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        x_cordinate = int((screen_width / 2) - (frame_width / 2))
+        y_cordinate = int((screen_height / 2) - (frame_height / 2))
+        self.root.geometry("{}x{}+{}+{}".format(frame_width, frame_height, x_cordinate, y_cordinate))
 
         self.user_var = tk.StringVar()
         self.pass_var = tk.StringVar()
 
         #### pannel ####
-        lbl_heading = Label(self.root, text= "Taxi Booking System", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20).place(x=0, y=0,relwidth=1, height=80)
+        lbl_heading = Label(self.root, text= "Taxi Booking System", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20)
+        lbl_heading.place(x=0, y=0,relwidth=1, height=80)
 
         # #_________images__________
         self.bg_frame = Image.open("C:\\Users\\Asus\\Desktop\\river.png")
@@ -61,6 +70,10 @@ class Login():
         def login():
             variable12 = CustomerLibs(username=username_txt.get(), password=pass_txt.get())
             result1 = customer_login(variable12)
+            variable13 = DriverLibs(username=username_txt.get(), password=pass_txt.get())
+            result2 = driver_login(variable13)
+            variable14 = adminlibs(username=username_txt.get(), password=pass_txt.get())
+            result3 = admin_login(variable14)
             if result1 != None:
                 Global.customerAccount =result1
                 messagebox.showinfo("TBS",'Welcome {}'.format(username_txt.get()))
@@ -68,9 +81,24 @@ class Login():
                 root=Tk()
                 Booktrip.booktrip_class(root)
                 root.mainloop()
+            elif result2 != None:
+                Global.driverAccount = result2
+                messagebox.showinfo("TBS", 'Welcome {}'.format(username_txt.get()))
+                self.root.destroy()
+                root=Tk()
+                Driver_Dashboard.driverdashboard(root)
+                root.mainloop()
+            elif result3 != None:
+                Global.adminAccount = result3
+                messagebox.showinfo("TBS", 'Welcome {}'.format(username_txt.get()))
+                self.root.destroy()
+                root=Tk()
+                Admindashboard.admin_dashboard(root)
+                root.mainloop()
+
 
             else:
-                messagebox.showerror("TBS","Error Occurred")
+                messagebox.showerror("TBS","Error Loging in")
 
 
       #_______________button____________

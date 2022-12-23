@@ -67,7 +67,7 @@ def delete_booking(delete):
 def update_booking(update):
     conn = None
     sql = """UPDATE booking set pickup_address=%s, pickup_time=%s, drop_address=%s WHERE booking_id=%s"""
-    values = (update.getpickup_address(), update.getpickup_time(), update.getdrop_address())
+    values = (update.getpickup_address(), update.getpickup_time(), update.getdrop_address(), update.getbooking_id())
     updateresult = False
     try:
         conn = connect()
@@ -83,4 +83,49 @@ def update_booking(update):
 
     finally:
         del values, sql, conn
-        return updateresult
+        return updateResult
+
+def bookingtable12():
+    conn=None
+    sql="""SELECT * FROM booking"""
+    result=None
+    try:
+        conn=connect()
+        cursor=conn.cursor()
+        cursor.execute(sql)
+        result=cursor.fetchall()
+        cursor.close()
+        conn.close()
+
+
+    except:
+        print("Error", sys.exc_info())
+
+    finally:
+        del  sql, conn
+        return result
+
+
+def driverupdatebooking(booking):
+    conn=None
+    sql="""UPDATE booking set booking_status=%s WHERE booking_id=%s"""
+    values=(booking.getbooking_status(), booking.getbooking_id())
+    result=False
+    try:
+        conn=connect()
+        cursor=conn.cursor()
+        cursor.execute(sql, values)
+        conn.commit()
+        cursor.close()
+        conn.close()
+        result=True
+
+
+    except:
+        print("Error", sys.exc_info())
+
+    finally:
+        del  sql, conn
+        return result
+
+

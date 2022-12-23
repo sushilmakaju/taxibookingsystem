@@ -16,7 +16,7 @@ class bookinglibs():
     def getdrop_address(self):
         return self.drop_address
     def getpickup_time(self):
-        return self.pickup_address
+        return self.pickup_time
     def getpickup_date(self):
         return self.pickup_date
     def getbooking_status(self):

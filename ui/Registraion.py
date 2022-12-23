@@ -1,6 +1,6 @@
 import tkinter
 from tkinter import *
-# from Login_Gui import *
+
 from tkinter import ttk
 import Login_Gui
 from backend.customerdbms import customer
@@ -47,6 +47,7 @@ class registration_class():
         comboData=('Male','Female')
         genderCombo = ttk.Combobox(frame,values=comboData, font=("Times New Roman", 15), width=15)
         genderCombo.insert(0,'Male')
+        genderCombo.insert(0,'Female')
         genderCombo.place(x=500, y=220)
 
         def reg12():
