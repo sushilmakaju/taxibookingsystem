@@ -15,7 +15,14 @@ class driverres_class():
         self.root = root
         self.root.title("DriverRegistrationpage")
         self.root.resizable(width=0, height=0)
-        self.root.geometry("750x450")
+        frame_width = 750
+        frame_height = 450
+        screen_width = self.root.winfo_screenwidth()
+        screen_height = self.root.winfo_screenheight()
+        x_cordinate = int((screen_width / 2) - (frame_width / 2))
+        y_cordinate = int((screen_height / 2) - (frame_height / 2))
+        self.root.geometry("{}x{}+{}+{}".format(frame_width, frame_height, x_cordinate, y_cordinate))
+
         #-------------frame------------------
         frame = LabelFrame(self.root, font=("goudy old style", 12, "bold"), bd=2, relief=RIDGE, bg="white")
         frame.place(x=10, y=10, width=720, height=420)

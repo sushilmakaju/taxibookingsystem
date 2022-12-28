@@ -8,11 +8,13 @@ from middleware import Global
 from middleware.booking_library import bookinglibs
 from tkinter import ttk
 
+from ui import Login_Gui
+
 
 class booktrip_class:
     def __init__(self,trip):
         self.trip = trip
-        self.trip.title("BookTrip | Welcome {}".format(Global.customerAccount[1]))
+        self.trip.title("CustomerDashboard | Welcome {}".format(Global.customerAccount[1]))
         self.trip.geometry("750x550")
         self.trip.resizable(0, False)
 
@@ -30,8 +32,19 @@ class booktrip_class:
 
         #_______label________
 
-        lbl_heading = Label(self.trip, text= "Booktrip", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20)
+        lbl_heading = Label(self.trip, text= "Customer Dashboard", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20)
         lbl_heading.place(x=0, y=0,relwidth=1, height=50)
+
+        def logout():
+            messagebox.showinfo("TBS", "Loging out")
+            self.trip.destroy()
+            trip=Tk()
+            Login_Gui.Login(trip)
+
+            trip.mainloop()
+
+        logout_btn = Button(self.trip, text="logout", command=logout, font=("Times New Roman", 15, "bold"),bg="blue", fg="white")
+        logout_btn.place(x=650, y=10)
 
       #____________frame________
         pickupframe = LabelFrame(self.trip, text="Booking", font=("TimesNewRoman", 12), bd=2, relief=RIDGE,bg="white")

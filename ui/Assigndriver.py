@@ -55,15 +55,6 @@ class assignbooking:
 
 
 
-
-
-
-
-
-
-
-
-
        def Assign():
           change_confirmed = bookinglibs(booking_id=customer_cmb.get(), driver_id=Rider_cmb.get(), booking_status='Confirmed')
           updatevalue = update_assign(change_confirmed)

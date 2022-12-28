@@ -19,9 +19,6 @@ from ui import Registraion, Booktrip, Admindashboard
 class Login():
     def __init__(self, root):
         self.root=root
-
-
-
         self.root.title("Loginpage")
         self.root.resizable(0,False)
         self.root.config(bg="#ffff00")
