@@ -14,21 +14,24 @@ class admin_dashboard():
         self.admin.resizable(0,False)
         self.admin.state('zoomed')
 
+        # #_________images__________
+
+        image2 = Image.open("C:\\Users\\Asus\\Desktop\\Taxi2.png")
+        image2 = image2.resize((1300, 750))
+        image2 = ImageTk.PhotoImage(image2)
+        Image_Label2 = Label(self.admin, image=image2)
+        Image_Label2.image = image2
+        Image_Label2.place(x=0, y=0)
+
         #heading
-        lbl_heading = Label(self.admin, text="Admin Dashboard",height=2, font=("Times New Roman", 20, "bold"), bg="blue", fg="white", padx=20)
+        lbl_heading = Label(self.admin, text="Admin Dashboard",height=2, font=("Times New Roman", 20, "bold"), bg="#E5CCFF", fg="black", padx=20)
         lbl_heading.pack(side=TOP, fill=BOTH)
 
-        # #_________images__________
-        image = Image.open("C:\\Users\\Asus\\Desktop\\download2.jpg")
-        image = image.resize((1280, 640))
-        image = ImageTk.PhotoImage(image)
-        Image_Label = Label(self.admin, image=image)
-        Image_Label.image = image
-        Image_Label.pack(side=RIGHT,fill=BOTH, expand=True)
+
 
         ##side frame
         menu_frame = Frame(self.admin, bd=5, bg="white")
-        menu_frame.place(x=0, y=70, width=250, height=650)
+        menu_frame.place(x=0, y=67, width=250, height=660)
 
         image = Image.open("C:\\Users\\Asus\\Desktop\\images.jpg")
         image = image.resize((250, 250))
@@ -40,6 +43,11 @@ class admin_dashboard():
         ##menu heading
         lblmenu_heading = Label(menu_frame, text= "Menu", font=("Times New Roman", 20, "bold"), bg="#FFCCFF", fg="black", anchor="c", padx=20)
         lblmenu_heading.place(x=0, y=290, relwidth=1)
+
+
+
+
+
 
         def customer():
             root = Tk()
@@ -57,6 +65,7 @@ class admin_dashboard():
             root.mainloop()
 
         def assign():
+            self.admin.destroy()
             root = Tk()
             Assigndriver.assignbooking(root)
             root.mainloop()

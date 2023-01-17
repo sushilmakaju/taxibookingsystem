@@ -50,9 +50,12 @@ class Login():
         login_frame.place(x=220, y=80, width=450, height=350)
 
         ##labels#
-        lbl_heading = Label(login_frame,text="Login here", font=("Elephant",18,"bold"),bg="white").place(x=32,y=10,relwidth=1)
-        lbl_username = Label(login_frame,text="Username: ", font=("TimesNewRoman",15),bg="white").place(x=32,y=65)
-        lbl_password = Label(login_frame,text="Password: ", font=("TimesNewRoman",15),bg="white").place(x=32, y=115)
+        lbl_heading = Label(login_frame,text="Login here", font=("Elephant",18,"bold"),bg="white")
+        lbl_heading .place(x=32,y=10,relwidth=1)
+        lbl_username = Label(login_frame,text="Username: ", font=("TimesNewRoman",15),bg="white")
+        lbl_username.place(x=32,y=65)
+        lbl_password = Label(login_frame,text="Password: ", font=("TimesNewRoman",15),bg="white")
+        lbl_password.place(x=32, y=115)
 
 
         #textfeild##

@@ -22,20 +22,20 @@ class driverdashboard:
 
         ################pannel###############
 
-        lbl_heading = Label(self.driver, text="DriverDashboard", font=("Times New Roman", 20,"bold"), bg="#ffff00", fg="black",anchor="c", padx=20)
+        lbl_heading = Label(self.driver, text="DriverDashboard", font=("Times New Roman", 20,"bold"), bg="#FFCCE5", fg="black",anchor="c", padx=20)
         lbl_heading.place(x=0, y=0, relwidth=1, height=60)
 
     #################labelframe1#################
         newtrip = LabelFrame(self.driver, font=("Times New Roman", 12, "bold"), bd=2, relief=SUNKEN, bg="white")
         newtrip.place(x=30, y=70, width=500, height=300)
-        newtrip_headinglbl= Label(newtrip, text="New Trip",font=("Times New Roman", 12, "bold"),bg="#ff8000",fg="black")
+        newtrip_headinglbl= Label(newtrip, text="New Trip",font=("Times New Roman", 12, "bold"),bg="#FFCCCC",fg="black")
         newtrip_headinglbl.pack(side=TOP, fill=X)
 
 
     ##############labelframe2#################
         oldtrip = LabelFrame(self.driver, font=("Times New Roman", 12, "bold"), bd=2, relief=SUNKEN, bg = "white")
         oldtrip.place(x=570, y=70, width=500, height=300)
-        oldtrip_headinglbl = Label(oldtrip, text="Old Trip", font=("Times New Roman", 12, "bold"), bg="#ffbf00",fg="black")
+        oldtrip_headinglbl = Label(oldtrip, text="Old Trip", font=("Times New Roman", 12, "bold"), bg="#E5FFCC",fg="black")
         oldtrip_headinglbl.pack(side=TOP, fill=X)
 
         treeview = ttk.Treeview(newtrip, height=13)
@@ -76,26 +76,6 @@ class driverdashboard:
             bookingid.insert(0, treeview.item(item)['values'][0])
 
         treeview.bind('<<TreeviewSelect>>',getdata)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         treeview1 = ttk.Treeview(oldtrip, height=13)

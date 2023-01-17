@@ -6,6 +6,7 @@ import Login_Gui
 from tkinter import messagebox
 from backend.driverdbms import rider
 from middleware.driver_library import DriverLibs
+from middleware.regex import namevalidation, usernamevalidation, mobvalidation, passvalidation
 
 
 class driverres_class():
@@ -27,7 +28,7 @@ class driverres_class():
         frame = LabelFrame(self.root, font=("goudy old style", 12, "bold"), bd=2, relief=RIDGE, bg="white")
         frame.place(x=10, y=10, width=720, height=420)
 
-        title = Label(frame, text="Driver Registration", font=("goudy old style", 20), bg="#ffff00", fg="black").place(x=30, y=20, width=660)
+        title = Label(frame, text="Driver Registration", font=("goudy old style", 20), bg="#E5CCFF", fg="black").place(x=30, y=20, width=660)
 
         #-----------labels-----------
         name_lbl = Label(frame, text="Name: ", font=("goudy old style", 15), bg="white").place(x=32, y=80)
@@ -54,19 +55,43 @@ class driverres_class():
         Licenseno_entry1.place(x=500, y=220,width=180)
 
         def divreg12():
-            name1 = nametxt.get()
-            user = username_entry1.get()
-            number = telephone_entry1.get()
-            password = password_entry1.get()
+            name1 = namevalidation(nametxt.get())
+            user = usernamevalidation(username_entry1.get())
+            number = mobvalidation(telephone_entry1.get())
+            password = passvalidation(password_entry1.get())
             add = Address_entry1.get()
             lic = Licenseno_entry1.get()
+            if nametxt.get()!='':
+                if username_entry1.get()!='':
+                    if telephone_entry1.get()!='':
+                        if password_entry1.get()!='':
+                            if name1 == True:
+                                if user == True:
+                                    if number == True:
+                                        if password == True:
 
-            div = DriverLibs('', name=name1, phone=number, address=add, username=user, password=password, licenseno=lic, status='Available')
-            result = rider(div)
-            if result == True:
-                messagebox.showinfo("TaxiBookingSystem", "Driver Registered suscessfully")
+                                            div = DriverLibs('', name=nametxt.get(), phone=telephone_entry1.get(), address=add, username=username_entry1.get(), password=password_entry1.get(), licenseno=lic, status='Available')
+                                            result = rider(div)
+                                            if result == True:
+                                                messagebox.showinfo("TaxiBookingSystem", "Driver Registered suscessfully")
+                                            else:
+                                                messagebox.showerror("TaxiBookingSystem", "Error Registering Driver")
+                                        else:
+                                            messagebox.showerror("TBS", "Invalid Password")
+                                    else:
+                                        messagebox.showerror("TBS", "Invalid Phone Number")
+                                else:
+                                    messagebox.showerror("TBS", "Invalid Username")
+                            else:
+                                messagebox.showerror("TBS", "Invalid Name")
+                        else:
+                            messagebox.showerror('TBS', 'Password Field is Entry')
+                    else:
+                        messagebox.showerror('TBS', 'Telephone Number is Empty')
+                else:
+                  messagebox.showerror('TBS', 'Username Field is Empty')
             else:
-                messagebox.showerror("TaxiBookingSystem", "Error Registering Driver")
+                messagebox.showerror('TBS', 'Name Field is Empty')
 
         def back12():
             self.root.destroy()
@@ -77,10 +102,10 @@ class driverres_class():
 
 
         #_________Button_________
-        Register_btn = Button(frame, text="Sumbit",font=("goudy old style",15),command=divreg12, bg="#ffff00",fg="black")
+        Register_btn = Button(frame, text="Sumbit",font=("goudy old style",15),command=divreg12, bg="#FFCC99",fg="black")
         Register_btn.place(x=350,y=300,width=110,height=40)
 
-        back_btn = Button(frame, text="Back to login",font=("goudy old style",15),command=back12,bg="#ffff00",fg="black",)
+        back_btn = Button(frame, text="Back",font=("goudy old style",15),command=back12,bg="#FFCC99",fg="black",)
         back_btn.place(x=550,y=300,width=110,height=40)
 
 
@@ -91,11 +116,3 @@ if __name__ == "__main__":
     root=Tk()
     driverres_class(root)
     root.mainloop()
-
-
-
-
-
-
-
-

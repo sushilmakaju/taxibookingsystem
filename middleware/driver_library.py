@@ -41,7 +41,7 @@ class DriverLibs():
         self.username=username
     def setpassword(self,password):
         self.password=password
-    def setgender(self,licenseno):
+    def setlicenseno(self,licenseno):
         self.licenceno=licenseno
     def setstatus(self,status):
         self.status=status

@@ -13,11 +13,11 @@ class assignbooking:
     def __init__(self,assign):
        self.assign=assign
        self.assign.title("AssignRider")
-       self.assign.geometry("1100x500")
+       self.assign.geometry("1050x500")
        self.assign.resizable(0,False)
 
        #### pannel ####
-       lbl_heading = Label(self.assign, text="AssignRider", font=("Times New Roman", 20), bg="#ffff00",fg="black", anchor="c", padx=20)
+       lbl_heading = Label(self.assign, text="AssignRider", font=("Times New Roman", 20), bg="#E5CCFF",fg="black", anchor="c", padx=20)
        lbl_heading.place(x=0, y=0, relwidth=1, height=60)
 
        # -------------frame------------------
@@ -77,7 +77,7 @@ class assignbooking:
 
 
     #__________button_____________
-       assign_btn = Button(frame,text="Assign",font=("TimesNewRoman",15),bg="olive",fg="white", command=Assign)
+       assign_btn = Button(frame,text="Assign",font=("TimesNewRoman",15),bg="#FFE5CC",fg="black", command=Assign)
        assign_btn.place(x=600,y=15,height=25)
 
 
@@ -90,9 +90,9 @@ class assignbooking:
 
         #____________label_______
 
-       unconfirmed_lbl = Label(booked_frame, text="Unconfirmed Booking List", font=("TimesNewRoman", 15),bg="#800000", fg="white")
+       unconfirmed_lbl = Label(booked_frame, text="Unconfirmed Booking List", font=("TimesNewRoman", 15),bg="#FFCCCC", fg="black")
        unconfirmed_lbl.pack(side=TOP, fill=X)
-       confirmed_lbl = Label(confirm_frame, text="Confirmed Booking List", font=("TimesNewRoman", 15), bg="#008080",fg="white")
+       confirmed_lbl = Label(confirm_frame, text="Confirmed Booking List", font=("TimesNewRoman", 15), bg="#CCCCFF",fg="black")
        confirmed_lbl.pack(side=TOP, fill=X)
 
        treeview = ttk.Treeview(booked_frame, height=13)

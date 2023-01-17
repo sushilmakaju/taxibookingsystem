@@ -32,7 +32,7 @@ class booktrip_class:
 
         #_______label________
 
-        lbl_heading = Label(self.trip, text= "Customer Dashboard", font= ("Times New Roman",20, "bold"),bg="blue", fg="white", anchor="c",padx=20)
+        lbl_heading = Label(self.trip, text= "Customer Dashboard", font= ("Times New Roman",20, "bold"),bg="#E5CCFF", fg="black", anchor="c",padx=20)
         lbl_heading.place(x=0, y=0,relwidth=1, height=50)
 
         def logout():
@@ -43,7 +43,7 @@ class booktrip_class:
 
             trip.mainloop()
 
-        logout_btn = Button(self.trip, text="logout", command=logout, font=("Times New Roman", 15, "bold"),bg="blue", fg="white")
+        logout_btn = Button(self.trip, text="logout", command=logout, font=("Times New Roman", 15, "bold"),bg="#E5CCFF", fg="black")
         logout_btn.place(x=650, y=10)
 
       #____________frame________
@@ -109,8 +109,10 @@ class booktrip_class:
                 treeview.delete(*treeview.get_children())
 
                 bookingtable()
+
             else:
                 messagebox.showerror("TBS", "Error Occurred")
+        
 
         def update():
             bookingidd = bookID.get()
@@ -138,7 +140,7 @@ class booktrip_class:
         update_btn.place(x=250,y=210,height=25)
 
 
-        delete_btn = Button(self.trip, text="Delete",command=delete, font=("TimesNewRoman",15),bg="#FF7F50", fg="white")
+        delete_btn = Button(self.trip, text="Cancel",command=delete, font=("TimesNewRoman",15),bg="#FF7F50", fg="white")
         delete_btn.place(x=350,y=210,height=25)
 
         def clear():
@@ -157,11 +159,10 @@ class booktrip_class:
         frame1=Frame(tab)
         frame1.pack()
 
-        frame2=Frame(tab)
-        frame2.pack()
+
 
         tab.add(frame1, text="Booking")
-        tab.add(frame2, text="Booking History")
+
 
         treeview=ttk.Treeview(frame1, height=13)
         treeview.pack(side=BOTTOM, fill=BOTH)
@@ -209,9 +210,9 @@ class booktrip_class:
 
             bookID.insert(0, treeview.item(selectitem)['values'][0])
             pickupdate_txt.insert(1, treeview.item(selectitem)['values'][3])
-            pickup_txt.insert(2, treeview.item(selectitem)['values'][2])
+            pickup_txt.insert(2, treeview.item(selectitem)['values'][1])
             time_txt.insert(3, treeview.item(selectitem)['values'][4])
-            dropaddress_txt.insert(4,treeview.item(selectitem)['values'][4])
+            dropaddress_txt.insert(4,treeview.item(selectitem)['values'][2])
 
         treeview.bind('<<TreeviewSelect>>', getData)
 
